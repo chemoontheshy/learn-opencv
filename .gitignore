@@ -5,3 +5,6 @@
 *.dll
 *.lib
 /build/.vs/learn-opencv/v16
+/3rdparty/video/save
+/bin/showVideo/x64-Debug
+/build/showVideo/x64/Debug
