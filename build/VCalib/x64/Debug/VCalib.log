@@ -1,0 +1,6 @@
+﻿  main.cpp
+D:\Code\gitroom\learn-opencv\3rdparty\include\Eigen\src\Core\arch\Default\Half.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\Code\gitroom\learn-opencv\3rdparty\include\Eigen\src\Core\arch\Default\BFloat16.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\Code\gitroom\learn-opencv\3rdparty\include\Eigen\src\Core\arch\Default\GenericPacketMathFunctions.h(666,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\Code\gitroom\learn-opencv\src\VCalib\main.cpp(130,88): warning C4305: “参数”: 从“double”到“const float”截断
+  VCalib.vcxproj -> D:\Code\gitroom\learn-opencv\bin\VCalib\x64-Debug\VCalib.exe
