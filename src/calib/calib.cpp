@@ -294,8 +294,8 @@ void calib::cam_calibration()
 	int64 temp = 0;
 	for (i = 0;; i++)
 	{
-		std::cout << vsnc::utils::__utc() - now << std::endl;
-		now = vsnc::utils::__utc();
+		//std::cout << vsnc::utils::__utc() - now << std::endl;
+		//now = vsnc::utils::__utc();
 		Mat view, viewGray;
 		bool blink = false;
 
@@ -306,7 +306,7 @@ void calib::cam_calibration()
 			view0.copyTo(view);
 		}
 	
-		temp = vsnc::utils::__utc();
+		//temp = vsnc::utils::__utc();
 		//结束
 		if (view.empty())
 		{
@@ -316,15 +316,15 @@ void calib::cam_calibration()
 				flags, cameraMatrix, distCoeffs);
 			break;
 		}
-		std::cout << "runAndSave: " << vsnc::utils::__utc()-temp << std::endl;
+		//std::cout << "runAndSave: " << vsnc::utils::__utc()-temp << std::endl;
 		//图片的宽高
 		imageSize = view.size();
 
-		temp = vsnc::utils::__utc();
+		// temp = vsnc::utils::__utc();
 		vector<Point2f> pointbuf;
 		//转换成灰色
 		cvtColor(view, viewGray, COLOR_BGR2GRAY);
-		std::cout << "cvtColor: " << vsnc::utils::__utc() - temp << std::endl;
+		// std::cout << "cvtColor: " << vsnc::utils::__utc() - temp << std::endl;
 
 		temp = vsnc::utils::__utc();
 		/*
@@ -348,8 +348,8 @@ void calib::cam_calibration()
 		default:
 			cerr<< "Unknown pattern type\n";
 		}
-		std::cout << "pattern: " << vsnc::utils::__utc() - temp << std::endl;
-		temp = vsnc::utils::__utc();
+		// std::cout << "pattern: " << vsnc::utils::__utc() - temp << std::endl;
+		// temp = vsnc::utils::__utc();
 		// improve the found corners' coordinate accuracy
 		//对检查到的角点进一步的优化计算，可使角点的精度达到亚像素级别。
 		// cv::TermCriteria 停止优化标志
@@ -401,15 +401,18 @@ void calib::cam_calibration()
 			// 计算去畸变和校正变换映射
 			undistort(temp, view, cameraMatrix, distCoeffs);
 		}
-		std::cout << "test: " << vsnc::utils::__utc() - temp << std::endl;
-		temp = vsnc::utils::__utc();
+		//std::cout << "test: " << vsnc::utils::__utc() - temp << std::endl;
+		//temp = vsnc::utils::__utc();
 		// 显示图片
-		imshow("Image View", view);
+		Mat shrink;
+		Size dSize = Size(view.size().width / 4, view.size().height / 2);
+		resize(view, shrink, dSize, 0, 0, INTER_AREA);
+		imshow("Image View", shrink);
 		// 等待时间
 		char key = (char)waitKey(capture.isOpened() ? 50 : 500);
 		
-		std::cout << "show and wait: " << vsnc::utils::__utc() - temp << std::endl;
-		temp = vsnc::utils::__utc();
+		//std::cout << "show and wait: " << vsnc::utils::__utc() - temp << std::endl;
+		//temp = vsnc::utils::__utc();
 		if (key == 27)
 			break;
 
@@ -436,7 +439,7 @@ void calib::cam_calibration()
 			if (!capture.isOpened())
 				break;
 		}
-		std::cout << "last: " << vsnc::utils::__utc() - temp << std::endl;
+		//std::cout << "last: " << vsnc::utils::__utc() - temp << std::endl;
 	}
 
 	if (!capture.isOpened() && showUndistorted)

@@ -29,6 +29,7 @@ void runAndSave(const std::string& outputFileName, const std::vector<std::vector
 		int totalPoints = 0;
 		double totalErr = 0;
 		double err;
+		perViewErrors.resize(objectPoints.size());
 		for (i; i < objectPoints.size(); i++)
 		{
 			cv::projectPoints(cv::Mat(objectPoints[i]), rvecs[i], tvecs[i],
@@ -120,7 +121,7 @@ int main()
 			cv::drawChessboardCorners(view, boardSize, pointBuf, found);
 		}
 		num++;
-		if (imagePoints.size() >= 10)
+		if (imagePoints.size() >= 20)
 		{
 			bStart = false;
 			std::string path = "er.re";
@@ -129,9 +130,13 @@ int main()
 			auto imageSize = view.size();
 			runAndSave(path, imagePoints, imageSize, boardSize, 0.0245, cameraMatrix, distCoeffs);
 			cv::Mat temp = view.clone();
-			cv::undistortPoints(temp, view, cameraMatrix, distCoeffs);
+			cv::undistort(temp, view, cameraMatrix, distCoeffs);
 			cv::imshow("video", view);
-			cv::waitKey(0);
+			char key = cv::waitKey(0);
+			if (key == 'q')
+			{
+				return 0;
+			}
 		}
 		if (num % 5 == 0 && bStart)
 		{
